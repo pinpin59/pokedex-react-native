@@ -1,4 +1,5 @@
 import ThemeSelect from "@/components/ui/ThemeSelect";
+import { usePokemon } from "@/hooks/usePokemon";
 import { useTheme } from "@/theme/useTheme";
 import { useTranslation } from "react-i18next";
 import { ScrollView, Text, View } from "react-native";
@@ -6,6 +7,9 @@ import { ScrollView, Text, View } from "react-native";
 export default function Index() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const { data, isLoading, isError } = usePokemon(4);
+  console.log(data);
+
   return (
     <View style={{ backgroundColor: colors.background }} className="flex-1 ">
       <ScrollView className="flex-1" contentContainerClassName="flex-grow">

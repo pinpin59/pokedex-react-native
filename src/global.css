@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: 255 255 255;
+    --color-foreground: 0 0 0;
+  }
+
+  .dark {
+    --color-background: 23 23 23;
+    --color-foreground: 255 255 255;
+  }
+}

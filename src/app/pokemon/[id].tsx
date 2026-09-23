@@ -16,7 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PokemonDetail() {
   const router = useRouter();
-  const language = i18n.language;
+  const { t, language } = i18n;
   const { id } = useLocalSearchParams<{ id: string }>();
   const { data, isLoading, isError } = usePokemon(Number(id));
   const { data: speciesData } = usePokemonSpecies(Number(id), language);
@@ -89,7 +89,7 @@ export default function PokemonDetail() {
       >
         {isLoading && <Spinner />}
 
-        {isError && <Text>Error loading Pokémon data.</Text>}
+        {isError && <Text>{t("cardPokemon.error")}</Text>}
 
         {data && (
           <View
@@ -103,7 +103,7 @@ export default function PokemonDetail() {
               style={{ color: backgroundColor }}
               className="text-center text-subtitle-1 mt-5"
             >
-              About
+              {t("cardPokemon.about")}
             </Text>
 
             <View className="mt-5">

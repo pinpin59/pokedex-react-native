@@ -7,9 +7,18 @@ type SvgProps = {
   color?: string;
   className?: string;
   style?: object;
+  strokeWidth?: number;
 };
 
-const SVG = ({ icon, width, height, color, className, style }: SvgProps) => {
+const SVG = ({
+  icon,
+  width,
+  height,
+  color,
+  className,
+  style,
+  strokeWidth,
+}: SvgProps) => {
   const coloredIcon = color
     ? icon
         .replace(/fill="[^"]*"/g, `fill="${color}"`)
@@ -18,13 +27,20 @@ const SVG = ({ icon, width, height, color, className, style }: SvgProps) => {
         .replace(/stroke:\s*[^;"]+/g, `stroke: ${color}`)
     : icon;
 
+  const styledIcon = strokeWidth
+    ? coloredIcon.replace(
+        /stroke-width="[^"]*"/g,
+        `stroke-width="${strokeWidth}"`,
+      )
+    : coloredIcon;
   return (
     <SvgXml
-      xml={coloredIcon}
+      xml={styledIcon}
       width={width}
       height={height}
       className={className}
       style={style}
+      strokeWidth={strokeWidth}
       accessible={false}
     />
   );

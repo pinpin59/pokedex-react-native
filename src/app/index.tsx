@@ -1,7 +1,8 @@
 import { Header } from "@/components/layout/Header";
 import { CardPokemon } from "@/components/pokedex/CardPokemon";
+import { CardPokemonSkeleton } from "@/components/pokedex/CardPokemonSkeleton";
+import Pagination from "@/components/pokedex/Pagination";
 import { SearchBar } from "@/components/pokedex/searchBar";
-import { Spinner } from "@/components/ui/Spinner";
 import { usePokemons } from "@/hooks/usePokemons";
 import { useTheme } from "@/theme/useTheme";
 import { router } from "expo-router";
@@ -13,7 +14,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const { data, isLoading, isError } = usePokemons();
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError } = usePokemons(page);
   const [search, setSearch] = useState("");
   const [searchBySort, setSearchBySort] = useState<"name" | "number">("number");
 
@@ -48,14 +50,33 @@ export default function Index() {
         style={{ backgroundColor: colors.background }}
         className="flex-1 rounded-3xl overflow-hidden p-2 mt-6"
       >
-        {isLoading && <Spinner />}
-
         {isError && (
           <View className="flex-1 items-center justify-center">
             <Text style={{ color: colors.foreground }}>
               {t("common.error")}
             </Text>
           </View>
+        )}
+        <Pagination
+          page={page}
+          onPrevious={() => setPage((prev) => prev - 1)}
+          onNext={() => setPage((prev) => prev + 1)}
+        />
+        {isLoading && (
+          <FlatList
+            className="mt-5"
+            data={Array.from({ length: 15 })}
+            numColumns={3}
+            keyExtractor={(_, index) => index.toString()}
+            columnWrapperStyle={{
+              marginBottom: 12,
+            }}
+            renderItem={() => (
+              <View className="w-1/3 items-center">
+                <CardPokemonSkeleton />
+              </View>
+            )}
+          />
         )}
 
         {data && !isLoading && !isError && (
@@ -70,7 +91,6 @@ export default function Index() {
             renderItem={({ item }) => (
               <Pressable
                 className="w-1/3 items-center"
-
                 accessibilityRole="button"
                 accessibilityLabel={`Voir ${item.name}`}
                 onPress={() => router.push(`/pokemon/${item.id}`)}

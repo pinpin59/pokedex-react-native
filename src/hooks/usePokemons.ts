@@ -1,9 +1,12 @@
 import { getPokemonList } from "@/services/pokemon.service";
 import { useQuery } from "@tanstack/react-query";
 
-export const usePokemons = (limit = 20, offset = 0) => {
+export const usePokemons = (page: number) => {
+  const limit = 21;
+  const offset = (page - 1) * limit;
+
   return useQuery({
-    queryKey: ["pokemons", limit, offset],
+    queryKey: ["pokemons", page],
     queryFn: () => getPokemonList(limit, offset),
   });
 };

@@ -17,6 +17,7 @@ export const colors = {
     rock: "#B69E31",
     steel: "#B7B9D0",
     water: "#6493EB",
+    fairy: "#EE99AC",
   },
 
   light: {

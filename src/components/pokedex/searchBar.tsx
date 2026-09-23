@@ -17,7 +17,7 @@ export const SearchBar = ({
   onSort,
 }: SearchBarProps) => {
   const { colors } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isSortModalVisible, setIsSortModalVisible] = useState(false);
 
   return (
@@ -67,7 +67,7 @@ export const SearchBar = ({
       </Pressable>
       <SortModal
         visible={isSortModalVisible}
-        sortBy={"number"}
+
         onSortChange={(sortBy) => {
           // Handle sort change
           onSort(sortBy);

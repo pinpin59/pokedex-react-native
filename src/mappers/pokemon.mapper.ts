@@ -8,9 +8,20 @@ export const mapPokemon = (data: any): Pokemon => {
     image: data.sprites.other["official-artwork"].front_default,
 
     types: data.types.map((type: { type: { name: string } }) => type.type.name),
-
+    description: data.description,
     cry: data.cries.latest,
 
+    moves: data.moves.slice(0, 2).map(
+      (move: {
+        move: {
+          name: string;
+          url: string;
+        };
+      }) => ({
+        name: move.move.name,
+        url: move.move.url,
+      }),
+    ),
     details: {
       height: data.height,
       weight: data.weight,

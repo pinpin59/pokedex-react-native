@@ -1,5 +1,5 @@
 import { mapPokemon } from "@/mappers/pokemon.mapper";
-import { PokemonListItem } from "@/type";
+import type { PokemonListItem, PokemonSpecies } from "@/type";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
@@ -37,4 +37,25 @@ export const getPokemon = async (id: number) => {
 
   const data = await response.json();
   return mapPokemon(data);
+};
+
+export const getPokemonSpecies = async (
+  id: number,
+  language: string,
+): Promise<{ description: string }> => {
+  const response = await fetch(`${API_URL}/pokemon-species/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch Pokemon species");
+  }
+
+  const data: PokemonSpecies = await response.json();
+
+  const entry = data.flavor_text_entries.find(
+    (entry) => entry.language.name === language,
+  );
+
+  return {
+    description: entry?.flavor_text.replace(/\n|\f/g, " ").trim() ?? "",
+  };
 };

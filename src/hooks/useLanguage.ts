@@ -9,7 +9,7 @@ export type Language = "fr" | "en";
 
 function getDeviceLanguage(): Language {
   const deviceLanguage = getLocales()[0]?.languageCode;
-
+  console.log("Device language:", deviceLanguage);
   if (deviceLanguage === "en") {
     return "en";
   }

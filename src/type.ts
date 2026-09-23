@@ -4,7 +4,9 @@ export interface Pokemon {
   image: string | null;
   types: string[];
   cry: string | null;
+  description: string | null;
   details: PokemonDetails;
+  moves: PokemonMove[];
 }
 
 export interface PokemonDetails {
@@ -27,3 +29,17 @@ export interface PokemonListItem {
   name: string;
   image: string;
 }
+
+export interface PokemonMove {
+  name: string;
+  url: string;
+}
+
+export type PokemonSpecies = {
+  flavor_text_entries: {
+    flavor_text: string;
+    language: {
+      name: string;
+    };
+  }[];
+};

@@ -12,4 +12,19 @@ export default {
     name: "Nom",
     number: "Numéro",
   },
+  cardPokemon: {
+    about: "À propos",
+    baseStats: "Statistiques de base",
+    weight: "Poids",
+    height: "Taille",
+    moves: "Attaques",
+  },
+  stats: {
+    hp: "PV",
+    attack: "Att",
+    defense: "Déf",
+    specialAttack: "Att Spé",
+    specialDefense: "Déf Spé",
+    speed: "Vit",
+  },
 };

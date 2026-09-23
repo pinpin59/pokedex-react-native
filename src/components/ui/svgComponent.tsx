@@ -10,7 +10,13 @@ type SvgProps = {
 };
 
 const SVG = ({ icon, width, height, color, className, style }: SvgProps) => {
-  const coloredIcon = color ? icon.replace(/currentColor/g, color) : icon;
+  const coloredIcon = color
+    ? icon
+        .replace(/fill="[^"]*"/g, `fill="${color}"`)
+        .replace(/stroke="[^"]*"/g, `stroke="${color}"`)
+        .replace(/fill:\s*[^;"]+/g, `fill: ${color}`)
+        .replace(/stroke:\s*[^;"]+/g, `stroke: ${color}`)
+    : icon;
 
   return (
     <SvgXml

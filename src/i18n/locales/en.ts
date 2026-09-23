@@ -19,6 +19,8 @@ export default {
     height: "Height",
     moves: "Moves",
     error: "Error loading Pokémon data",
+    weightUnit: "lbs",
+    heightUnit: "ft",
   },
   stats: {
     hp: "HP",

@@ -42,7 +42,7 @@ export const getPokemon = async (id: number) => {
 export const getPokemonSpecies = async (
   id: number,
   language: string,
-): Promise<{ description: string }> => {
+): Promise<{ name: string; description: string }> => {
   const response = await fetch(`${API_URL}/pokemon-species/${id}`);
 
   if (!response.ok) {
@@ -51,11 +51,43 @@ export const getPokemonSpecies = async (
 
   const data: PokemonSpecies = await response.json();
 
-  const entry = data.flavor_text_entries.find(
+  const nameEntry = data.names.find(
+    (entry) => entry.language.name === language,
+  );
+
+  const descriptionEntry = data.flavor_text_entries.find(
     (entry) => entry.language.name === language,
   );
 
   return {
-    description: entry?.flavor_text.replace(/\n|\f/g, " ").trim() ?? "",
+    name: nameEntry?.name ?? "",
+    description:
+      descriptionEntry?.flavor_text.replace(/\n|\f/g, " ").trim() ?? "",
   };
+};
+
+export const getPokemonsTranslatedNames = async (
+  pokemonList: PokemonListItem[],
+  language: string,
+): Promise<PokemonListItem[]> => {
+  return Promise.all(
+    pokemonList.map(async (pokemon) => {
+      const response = await fetch(`${API_URL}/pokemon-species/${pokemon.id}`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch Pokemon species");
+      }
+
+      const data = await response.json();
+
+      const translatedName = data.names.find(
+        (item: any) => item.language.name === language,
+      );
+
+      return {
+        ...pokemon,
+        name: translatedName?.name ?? pokemon.name,
+      };
+    }),
+  );
 };

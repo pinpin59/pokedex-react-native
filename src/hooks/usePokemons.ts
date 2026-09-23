@@ -1,12 +1,17 @@
-import { getPokemonList } from "@/services/pokemon.service";
+import {
+  getPokemonList,
+  getPokemonsTranslatedNames,
+} from "@/services/pokemon.service";
 import { useQuery } from "@tanstack/react-query";
 
-export const usePokemons = (page: number) => {
-  const limit = 21;
-  const offset = (page - 1) * limit;
-
+export const usePokemons = (page: number, language: string) => {
   return useQuery({
-    queryKey: ["pokemons", page],
-    queryFn: () => getPokemonList(limit, offset),
+    queryKey: ["pokemons", page, language],
+
+    queryFn: async () => {
+      const pokemonList = await getPokemonList(21, (page - 1) * 20);
+
+      return getPokemonsTranslatedNames(pokemonList, language);
+    },
   });
 };

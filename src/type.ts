@@ -1,10 +1,10 @@
 export interface Pokemon {
   id: number;
   name: string;
-  image: string | null;
+  image: string;
   types: string[];
-  cry: string | null;
-  description: string | null;
+  cry: string;
+  description: string;
   details: PokemonDetails;
   moves: PokemonMove[];
 }
@@ -36,6 +36,13 @@ export interface PokemonMove {
 }
 
 export type PokemonSpecies = {
+  names: {
+    name: string;
+    language: {
+      name: string;
+    };
+  }[];
+
   flavor_text_entries: {
     flavor_text: string;
     language: {

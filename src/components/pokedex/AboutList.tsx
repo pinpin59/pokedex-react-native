@@ -18,9 +18,24 @@ type AboutListProps = {
 
 export const AboutList = ({ data }: AboutListProps) => {
   const { colors } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const isFrench = i18n.language === "fr";
+
+  // PokeAPI:
+  // weight → hectograms (hg)
+  // height → decimeters (dm)
+
+  const weight = isFrench
+    ? `${(data.details.weight / 10).toFixed(1)} `
+    : `${((data.details.weight / 10) * 2.20462).toFixed(1)}`;
+
+  const height = isFrench
+    ? `${(data.details.height / 10).toFixed(1)} m`
+    : `${((data.details.height / 10) * 3.28084).toFixed(1)}`;
+
   return (
-    <View className="flex-row w-full">
+    <View className="w-full flex-row">
       {/* Weight */}
       <View className="flex-1 items-center justify-center">
         <View className="h-14 w-full items-center justify-center">
@@ -33,7 +48,7 @@ export const AboutList = ({ data }: AboutListProps) => {
             />
 
             <Text style={{ color: colors.foreground }} className="text-body-1">
-              {data.details.weight} hg
+              {weight} {t("cardPokemon.weightUnit")}
             </Text>
           </View>
         </View>
@@ -47,7 +62,7 @@ export const AboutList = ({ data }: AboutListProps) => {
 
         {/* Border */}
         <View
-          className="absolute right-1 top-2 bottom-2 w-px"
+          className="absolute bottom-2 right-1 top-2 w-px"
           style={{ backgroundColor: colors.grayscale.light }}
         />
       </View>
@@ -64,7 +79,7 @@ export const AboutList = ({ data }: AboutListProps) => {
             />
 
             <Text style={{ color: colors.foreground }} className="text-body-1">
-              {data.details.height} dm
+              {height} {t("cardPokemon.heightUnit")}
             </Text>
           </View>
         </View>
@@ -78,7 +93,7 @@ export const AboutList = ({ data }: AboutListProps) => {
 
         {/* Border */}
         <View
-          className="absolute right-1 top-2 bottom-2 w-px"
+          className="absolute bottom-2 right-1 top-2 w-px"
           style={{ backgroundColor: colors.grayscale.light }}
         />
       </View>

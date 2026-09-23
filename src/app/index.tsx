@@ -4,6 +4,7 @@ import { CardPokemonSkeleton } from "@/components/pokedex/CardPokemonSkeleton";
 import Pagination from "@/components/pokedex/Pagination";
 import { SearchBar } from "@/components/pokedex/searchBar";
 import { usePokemons } from "@/hooks/usePokemons";
+import i18n from "@/i18n";
 import { useTheme } from "@/theme/useTheme";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -15,7 +16,9 @@ export default function Index() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError } = usePokemons(page);
+  const { language } = i18n;
+
+  const { data, isLoading, isError } = usePokemons(page, language);
   const [search, setSearch] = useState("");
   const [searchBySort, setSearchBySort] = useState<"name" | "number">("number");
 

@@ -19,6 +19,8 @@ export default {
     height: "Taille",
     moves: "Attaques",
     error: "Erreur lors du chargement des données du Pokémon",
+    weightUnit: "kg",
+    heightUnit: "m",
   },
   stats: {
     hp: "PV",

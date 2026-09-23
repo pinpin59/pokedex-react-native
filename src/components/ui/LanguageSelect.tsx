@@ -1,5 +1,6 @@
 import { SVGLangage } from "@/svg";
 import { useTheme } from "@/theme/useTheme";
+import { useTranslation } from "react-i18next";
 import { Pressable, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -14,6 +15,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 export default function LanguageSelect() {
   const { language, setLanguage } = useLanguage();
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   const scale = useSharedValue(1);
   const translateX = useSharedValue(0);
@@ -22,10 +24,12 @@ export default function LanguageSelect() {
     transform: [{ scale: scale.value }, { translateX: translateX.value }],
   }));
 
+  const nextLanguage = language === "fr" ? "en" : "fr";
+
   return (
     <View>
       <AnimatedPressable
-        onPress={() => setLanguage(language === "fr" ? "en" : "fr")}
+        onPress={() => setLanguage(nextLanguage)}
         onPressIn={() => {
           scale.value = withSpring(0.85);
         }}
@@ -39,6 +43,10 @@ export default function LanguageSelect() {
           },
           animatedStyle,
         ]}
+        accessible
+        accessibilityRole="button"
+        accessibilityLabel={t("accessibility.changeLanguage")}
+        accessibilityHint={t("accessibility.changeLanguageHint")}
       >
         <SVG
           icon={SVGLangage}

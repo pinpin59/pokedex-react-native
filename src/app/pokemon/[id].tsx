@@ -88,8 +88,11 @@ export default function PokemonDetail() {
           accessibilityRole="image"
           accessibilityLabel={
             data.name
-              ? `${data.name}, Pokémon numéro ${data.id}`
-              : "Image du Pokémon"
+              ? t("accessibility.pokemonImage", {
+                  name: speciesData?.name ?? data?.name,
+                  id: data.id,
+                })
+              : t("accessibility.pokemonImageFallback")
           }
         >
           <Image
@@ -120,8 +123,8 @@ export default function PokemonDetail() {
           <Pressable
             onPress={() => router.back()}
             accessibilityRole="button"
-            accessibilityLabel="Retour"
-            accessibilityHint="Revient à la liste des Pokémon"
+            accessibilityLabel={t("accessibility.back")}
+            accessibilityHint={t("accessibility.backHint")}
           >
             <SVG icon={SVGArrowBack} width={30} height={30} color="#FFF" />
           </Pressable>
@@ -149,7 +152,9 @@ export default function PokemonDetail() {
             className="text-center text-subtitle-1 text-white"
             accessible
             accessibilityLabel={
-              data?.id ? `Numéro ${data.id}` : "Numéro du Pokémon"
+              data?.id
+                ? t("accessibility.pokemonNumber", { id: data.id })
+                : t("accessibility.pokemonNumberFallback")
             }
           >
             #{data?.id}
@@ -166,8 +171,8 @@ export default function PokemonDetail() {
             disabled={pokemonId === 1}
             onPress={handlePrevious}
             accessibilityRole="button"
-            accessibilityLabel="Pokémon précédent"
-            accessibilityHint="Affiche le Pokémon précédent"
+            accessibilityLabel={t("accessibility.previousPokemon")}
+            accessibilityHint={t("accessibility.previousPokemonHint")}
             accessibilityState={{
               disabled: pokemonId === 1,
             }}
@@ -185,8 +190,8 @@ export default function PokemonDetail() {
             disabled={pokemonId === 1351}
             onPress={handleNext}
             accessibilityRole="button"
-            accessibilityLabel="Pokémon suivant"
-            accessibilityHint="Affiche le Pokémon suivant"
+            accessibilityLabel={t("accessibility.nextPokemon")}
+            accessibilityHint={t("accessibility.nextPokemonHint")}
             accessibilityState={{
               disabled: pokemonId === 1351,
             }}

@@ -31,7 +31,7 @@ export const AboutList = ({ data }: AboutListProps) => {
     : `${((data.details.weight / 10) * 2.20462).toFixed(1)}`;
 
   const height = isFrench
-    ? `${(data.details.height / 10).toFixed(1)} m`
+    ? `${(data.details.height / 10).toFixed(1)} `
     : `${((data.details.height / 10) * 3.28084).toFixed(1)}`;
 
   return (

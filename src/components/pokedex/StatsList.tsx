@@ -23,16 +23,19 @@ export const StatsList = ({ data, color }: { data: Stats; color: string }) => {
 
   return (
     <View className="w-full">
-      {Object.entries(data).map(([name, value]) => (
-        <StatRow
-          key={name}
-          name={name}
-          value={value}
-          color={color}
-          colors={colors}
-          label={t(`stats.${name}`)}
-        />
-      ))}
+      {Object.entries(data).map(([name, value]) => {
+        return (
+          <StatRow
+            key={name}
+            name={name}
+            value={value}
+            color={color}
+            colors={colors}
+            accessibilityLabel={t(`accessibility.${name}`)}
+            label={t(`stats.${name}`)}
+          />
+        );
+      })}
     </View>
   );
 };
@@ -43,9 +46,17 @@ type StatRowProps = {
   color: string;
   label: string;
   colors: ReturnType<typeof useTheme>["colors"];
+  accessibilityLabel: string;
 };
 
-const StatRow = ({ value, color, label, colors }: StatRowProps) => {
+const StatRow = ({
+  value,
+  color,
+  label,
+  colors,
+  name,
+  accessibilityLabel,
+}: StatRowProps) => {
   const progress = useSharedValue(0);
 
   useEffect(() => {
@@ -72,6 +83,7 @@ const StatRow = ({ value, color, label, colors }: StatRowProps) => {
         <Text
           style={{ color: colors.foreground }}
           className="text-subtitle-1 uppercase"
+          accessibilityLabel={accessibilityLabel}
         >
           {label}
         </Text>

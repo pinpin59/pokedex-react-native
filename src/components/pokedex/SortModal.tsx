@@ -7,39 +7,44 @@ type SortBy = "name" | "number";
 
 type SortModalProps = {
   visible: boolean;
-
   onSortChange: (sortBy: SortBy) => void;
   onClose: () => void;
 };
 
 export const SortModal = ({
   visible,
-
   onSortChange,
   onClose,
 }: SortModalProps) => {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const [sortBy, setSortBy] = useState<SortBy>("number");
+
   return (
     <Modal
       visible={visible}
       transparent
       animationType="fade"
       onRequestClose={onClose}
+      accessibilityViewIsModal
     >
-      <Pressable
-        className="flex-1 items-center justify-center bg-black/40"
-        onPress={onClose}
-      >
+      <View className="flex-1 items-center justify-center bg-black/40">
+        {/* Backdrop */}
         <Pressable
+          className="absolute inset-0"
+          onPress={onClose}
+          accessible={false}
+        />
+
+        {/* Modal content */}
+        <View
           className="w-[80%] rounded-3xl p-5"
           style={{ backgroundColor: colors.grayscale.white }}
-          onPress={(event) => event.stopPropagation()}
         >
           <Text
-            className="text-subtitle-1 mb-4"
+            className="mb-4 text-subtitle-1"
             style={{ color: colors.foreground }}
+            accessibilityRole="header"
           >
             {t("sort.title")}
           </Text>
@@ -53,9 +58,13 @@ export const SortModal = ({
             }}
             className="flex-row items-center py-3"
             accessibilityRole="radio"
-            accessibilityState={{ selected: sortBy === "name" }}
+            accessibilityLabel={t("sort.name")}
+            accessibilityState={{
+              selected: sortBy === "name",
+            }}
           >
             <View
+              accessible={false}
               className="h-5 w-5 items-center justify-center rounded-full border-2"
               style={{ borderColor: colors.primary }}
             >
@@ -68,6 +77,7 @@ export const SortModal = ({
             </View>
 
             <Text
+              accessible={false}
               className="ml-3 text-body-1"
               style={{ color: colors.foreground }}
             >
@@ -84,9 +94,13 @@ export const SortModal = ({
             }}
             className="flex-row items-center py-3"
             accessibilityRole="radio"
-            accessibilityState={{ selected: sortBy === "number" }}
+            accessibilityLabel={t("sort.number")}
+            accessibilityState={{
+              selected: sortBy === "number",
+            }}
           >
             <View
+              accessible={false}
               className="h-5 w-5 items-center justify-center rounded-full border-2"
               style={{ borderColor: colors.primary }}
             >
@@ -99,14 +113,15 @@ export const SortModal = ({
             </View>
 
             <Text
+              accessible={false}
               className="ml-3 text-body-1"
               style={{ color: colors.foreground }}
             >
               {t("sort.number")}
             </Text>
           </Pressable>
-        </Pressable>
-      </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 };

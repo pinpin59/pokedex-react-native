@@ -1,6 +1,7 @@
 import { SVGMoon, SVGSun } from "@/svg";
 import { pokemonColors } from "@/theme/colors";
 import { useTheme } from "@/theme/useTheme";
+import { useTranslation } from "react-i18next";
 import { Pressable } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -13,6 +14,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export default function ThemeSelect() {
   const { theme, setTheme, colors } = useTheme();
+  const { t } = useTranslation();
 
   const isDark = theme === "dark";
 
@@ -42,7 +44,7 @@ export default function ThemeSelect() {
         animatedStyle,
       ]}
       accessibilityRole="switch"
-      accessibilityLabel="Changer de thème"
+      accessibilityLabel={t("accessibility.changeTheme")}
       accessibilityState={{ checked: isDark }}
     >
       {isDark ? (

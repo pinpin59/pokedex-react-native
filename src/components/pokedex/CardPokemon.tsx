@@ -1,16 +1,21 @@
 import { useTheme } from "@/theme/useTheme";
 import { PokemonListItem } from "@/type";
+import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
 export const CardPokemon = ({ Pokemon }: { Pokemon: PokemonListItem }) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <View
       accessible
       accessibilityRole="button"
-      accessibilityLabel={`Pokémon ${Pokemon.name}, numéro ${Pokemon.id}`}
-      accessibilityHint="Touchez deux fois pour voir les détails du Pokémon"
+      accessibilityLabel={t("accessibility.pokemonCard", {
+        name: Pokemon.name,
+        id: Pokemon.id,
+      })}
+      accessibilityHint={t("accessibility.pokemonCardHint")}
       className="mt-1 w-[94%] rounded-2xl p-1"
       style={{
         backgroundColor: colors.grayscale.background,

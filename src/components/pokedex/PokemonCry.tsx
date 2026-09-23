@@ -1,5 +1,6 @@
 import { SVGVolume } from "@/svg";
 import { useAudioPlayer } from "expo-audio";
+import { useTranslation } from "react-i18next";
 import { Pressable } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -18,6 +19,7 @@ type PokemonCryProps = {
 
 export const PokemonCry = ({ cry }: PokemonCryProps) => {
   const player = useAudioPlayer(cry);
+  const { t } = useTranslation();
 
   const scale = useSharedValue(1);
   const rotation = useSharedValue(0);
@@ -50,7 +52,7 @@ export const PokemonCry = ({ cry }: PokemonCryProps) => {
       onPress={handlePlay}
       style={animatedStyle}
       accessibilityRole="button"
-      accessibilityLabel="Écouter le cri du Pokémon"
+      accessibilityLabel={t("accessibility.playCry")}
     >
       <SVG icon={SVGVolume} width={30} height={30} color="#FFF" />
     </AnimatedPressable>

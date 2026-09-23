@@ -39,8 +39,7 @@ export const Header = () => {
       <AnimatedPressable
         onPress={handlePokeballPress}
         style={animatedStyle}
-        accessibilityRole="button"
-        accessibilityLabel="Pokéball"
+        accessible={false}
       >
         <SVG icon={SVGPokeball} width={30} height={30} />
       </AnimatedPressable>

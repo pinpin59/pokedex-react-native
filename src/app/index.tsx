@@ -95,7 +95,9 @@ export default function Index() {
               <Pressable
                 className="w-1/3 items-center"
                 accessibilityRole="button"
-                accessibilityLabel={`Voir ${item.name}`}
+                accessibilityLabel={t("accessibility.viewPokemon", {
+                  name: item.name,
+                })}
                 onPress={() => router.push(`/pokemon/${item.id}`)}
               >
                 <CardPokemon Pokemon={item} />

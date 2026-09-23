@@ -1,28 +1,82 @@
-import ThemeSelect from "@/components/ui/ThemeSelect";
-import { usePokemon } from "@/hooks/usePokemon";
+import { Header } from "@/components/layout/Header";
+import { CardPokemon } from "@/components/pokedex/CardPokemon";
+import { SearchBar } from "@/components/pokedex/searchBar";
+import { usePokemons } from "@/hooks/usePokemons";
 import { useTheme } from "@/theme/useTheme";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const { data, isLoading, isError } = usePokemon(4);
-  console.log(data);
+  const { data, isLoading, isError } = usePokemons();
+  const [search, setSearch] = useState("");
+  const [searchBySort, setSearchBySort] = useState<"name" | "number">("number");
+
+  const filteredData = data
+    ?.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(search.toLowerCase()),
+    )
+    .sort((a, b) => {
+      if (searchBySort === "name") {
+        return a.name.localeCompare(b.name);
+      }
+
+      return a.id - b.id;
+    });
 
   return (
-    <View style={{ backgroundColor: colors.background }} className="flex-1 ">
-      <ScrollView className="flex-1" contentContainerClassName="flex-grow">
-        <View className="flex-1 p-5 mt-10">
-          <Text
-            style={{ color: colors.foreground }}
-            className="text-2xl font-bold "
-          >
-            Pokédex
-          </Text>
-          <ThemeSelect />
-        </View>
-      </ScrollView>
-    </View>
+    <SafeAreaView
+      edges={["top", "left", "right"]}
+      style={{ backgroundColor: colors.primary }}
+      className="flex-1 p-2"
+    >
+      <View className="px-2">
+        <Header />
+        <SearchBar
+          search={search}
+          onSearchChange={setSearch}
+          onSort={setSearchBySort}
+        />
+      </View>
+
+      <View
+        style={{ backgroundColor: colors.background }}
+        className="flex-1 rounded-3xl overflow-hidden p-2 mt-6"
+      >
+        {isLoading && (
+          <View className="flex-1 items-center justify-center">
+            <ActivityIndicator size="large" color={colors.primary} />
+          </View>
+        )}
+
+        {isError && (
+          <View className="flex-1 items-center justify-center">
+            <Text style={{ color: colors.foreground }}>
+              {t("common.error")}
+            </Text>
+          </View>
+        )}
+
+        {data && !isLoading && !isError && (
+          <FlatList
+            className="mt-5"
+            data={filteredData}
+            numColumns={3}
+            keyExtractor={(item) => item.id.toString()}
+            columnWrapperStyle={{
+              marginBottom: 12,
+            }}
+            renderItem={({ item }) => (
+              <View className="w-1/3 items-center">
+                <CardPokemon Pokemon={item} />
+              </View>
+            )}
+          />
+        )}
+      </View>
+    </SafeAreaView>
   );
 }

@@ -21,3 +21,9 @@ export interface PokemonStats {
   specialDefense: number;
   speed: number;
 }
+
+export interface PokemonListItem {
+  id: number;
+  name: string;
+  image: string;
+}

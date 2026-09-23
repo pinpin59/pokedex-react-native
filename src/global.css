@@ -13,3 +13,36 @@
     --color-foreground: 255 255 255;
   }
 }
+@layer components {
+  .text-headline {
+    @apply text-[24px] leading-[32px] font-bold;
+  }
+
+  .text-subtitle-1 {
+    @apply text-[14px] leading-[16px] font-bold;
+  }
+
+  .text-subtitle-2 {
+    @apply text-[12px] leading-[16px] font-bold;
+  }
+
+  .text-subtitle-3 {
+    @apply text-[10px] leading-[16px] font-bold;
+  }
+
+  .text-body-1 {
+    @apply text-[14px] leading-[16px] font-normal;
+  }
+
+  .text-body-2 {
+    @apply text-[12px] leading-[16px] font-normal;
+  }
+
+  .text-body-3 {
+    @apply text-[10px] leading-[16px] font-normal;
+  }
+
+  .text-caption {
+    @apply text-[8px] leading-[12px] font-normal;
+  }
+}

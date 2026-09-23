@@ -1,6 +1,4 @@
 export const colors = {
-  primary: "#DC0A2D",
-
   pokemon: {
     bug: "#A7B723",
     dark: "#75574C",
@@ -24,6 +22,7 @@ export const colors = {
   light: {
     background: "#EFEFEF",
     foreground: "#212121",
+    primary: "#DC0A2D",
     grayscale: {
       dark: "#212121",
       medium: "#666666",
@@ -36,6 +35,8 @@ export const colors = {
   dark: {
     background: "#212121",
     foreground: "#FFFFFF",
+    primary: "#A80724",
+
     grayscale: {
       dark: "#FFFFFF",
       medium: "#B3B3B3",
@@ -47,3 +48,6 @@ export const colors = {
 } as const;
 export type ThemeName = "light" | "dark";
 export type ThemeColors = (typeof colors)[ThemeName];
+
+export const pokemonColors = colors.pokemon;
+export type PokemonType = keyof typeof pokemonColors;

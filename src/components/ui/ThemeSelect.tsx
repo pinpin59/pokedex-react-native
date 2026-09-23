@@ -1,25 +1,41 @@
+import { SVGMoon, SVGSun } from "@/svg";
+import { pokemonColors } from "@/theme/colors";
 import { useTheme } from "@/theme/useTheme";
-import { Pressable, Text, View } from "react-native";
+import { Pressable } from "react-native";
+import SVG from "../ui/svgComponent";
 
 export default function ThemeSelect() {
-  const { theme, setTheme } = useTheme();
-  const { colors } = useTheme();
+  const { theme, setTheme, colors } = useTheme();
+
+  const isDark = theme === "dark";
 
   return (
-    <View>
-      <Text style={{ color: colors.foreground }}>Thème actuel : {theme}</Text>
-
-      <Pressable onPress={() => setTheme("light")}>
-        <Text style={{ color: colors.foreground }}>☀️ Clair</Text>
-      </Pressable>
-
-      <Pressable onPress={() => setTheme("dark")}>
-        <Text style={{ color: colors.foreground }}>🌙 Sombre</Text>
-      </Pressable>
-
-      <Pressable onPress={() => setTheme("system")}>
-        <Text style={{ color: colors.foreground }}>⚙️ Système</Text>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={() => setTheme(isDark ? "light" : "dark")}
+      className="h-10 w-10 items-center justify-center rounded-full"
+      style={{
+        backgroundColor: colors.grayscale.white,
+      }}
+      accessibilityRole="switch"
+      accessibilityLabel="Changer de thème"
+      accessibilityState={{ checked: isDark }}
+    >
+      {isDark ? (
+        <SVG icon={SVGMoon} width={22} height={22} color={colors.primary} />
+      ) : (
+        <SVG
+          icon={SVGSun}
+          width={22}
+          height={22}
+          color={pokemonColors.electric}
+        />
+      )}
+      {/* <SVG
+        icon={isDark ? SVGMoon : SVGSun}
+        width={22}
+        height={22}
+        color={colors.primary}
+      /> */}
+    </Pressable>
   );
 }

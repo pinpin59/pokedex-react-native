@@ -30,7 +30,6 @@ export default function Index() {
       if (searchBySort === "name") {
         return a.name.localeCompare(b.name);
       }
-
       return a.id - b.id;
     });
 
@@ -38,9 +37,10 @@ export default function Index() {
     <SafeAreaView
       edges={["top", "left", "right"]}
       style={{ backgroundColor: colors.primary }}
-      className="flex-1 p-2"
+      className="flex-1"
     >
-      <View className="px-2">
+      {/* Header + SearchBar */}
+      <View className="px-5 mt-4">
         <Header />
         <SearchBar
           search={search}
@@ -49,9 +49,10 @@ export default function Index() {
         />
       </View>
 
+      {/* card list */}
       <View
         style={{ backgroundColor: colors.background }}
-        className="flex-1 rounded-3xl overflow-hidden p-2 mt-6"
+        className="flex-1 rounded-t-[40px] overflow-hidden mt-6 px-2 pt-4"
       >
         {isError && (
           <View className="flex-1 items-center justify-center">
@@ -60,17 +61,20 @@ export default function Index() {
             </Text>
           </View>
         )}
+
         <Pagination
           page={page}
           onPrevious={() => setPage((prev) => prev - 1)}
           onNext={() => setPage((prev) => prev + 1)}
         />
+
         {isLoading && (
           <FlatList
             className="mt-5"
             data={Array.from({ length: 15 })}
             numColumns={3}
             keyExtractor={(_, index) => index.toString()}
+            contentContainerStyle={{ paddingBottom: 40 }}
             columnWrapperStyle={{
               marginBottom: 12,
             }}
@@ -88,6 +92,7 @@ export default function Index() {
             data={filteredData}
             numColumns={3}
             keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={{ paddingBottom: 40 }}
             columnWrapperStyle={{
               marginBottom: 12,
             }}
@@ -98,6 +103,7 @@ export default function Index() {
                 accessibilityLabel={t("accessibility.viewPokemon", {
                   name: item.name,
                 })}
+
                 onPress={() => router.push(`/pokemon/${item.id}`)}
               >
                 <CardPokemon Pokemon={item} />

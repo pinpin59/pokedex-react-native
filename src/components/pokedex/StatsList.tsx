@@ -70,7 +70,7 @@ const StatRow = ({
   }));
 
   return (
-    <View className="flex-row items-center py-2">
+    <View className="flex-row justify-center items-center  py-2">
       {/* Nom */}
       <View
         style={{
@@ -104,7 +104,7 @@ const StatRow = ({
       {/* Barre */}
       <View
         style={{
-          width: 150,
+          width: 200,
           height: 8,
           marginLeft: 8,
           backgroundColor: colors.grayscale.light,

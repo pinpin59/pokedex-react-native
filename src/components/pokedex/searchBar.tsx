@@ -11,6 +11,7 @@ type SearchBarProps = {
   onSearchChange: (value: string) => void;
   onSort: (sortBy: "name" | "number") => void;
 };
+
 export const SearchBar = ({
   search,
   onSearchChange,
@@ -22,31 +23,19 @@ export const SearchBar = ({
 
   return (
     <View className="mt-5 flex-row items-center gap-3">
-      {/* Search */}
-      <View className="relative flex-1">
-        <SVG
-          icon={SVGSearch}
-          width={20}
-          height={20}
-          color={colors.primary}
-          style={{
-            position: "absolute",
-            left: 12,
-            top: 8,
-            zIndex: 10,
-          }}
-        />
+      <View className="flex-1 flex-row items-center h-10 rounded-3xl bg-white px-3">
+        <SVG icon={SVGSearch} width={20} height={20} color={colors.primary} />
 
         <TextInput
           accessibilityLabel={t("header.search")}
           accessibilityHint={t("accessibility.searchHint")}
           accessibilityRole="search"
-          className="h-10 rounded-3xl bg-white pl-10 pr-3"
+          className="flex-1 ml-2 h-full text-black"
           value={search}
           onChangeText={onSearchChange}
           placeholder={t("header.search")}
-
           placeholderTextColor={colors.grayscale.medium}
+          style={{ paddingVertical: 0 }}
         />
       </View>
 
@@ -65,11 +54,10 @@ export const SearchBar = ({
           color={colors.primary}
         />
       </Pressable>
+
       <SortModal
         visible={isSortModalVisible}
-
         onSortChange={(sortBy) => {
-          // Handle sort change
           onSort(sortBy);
           setIsSortModalVisible(false);
         }}

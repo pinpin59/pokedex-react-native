@@ -9,13 +9,6 @@ export const CardPokemon = ({ Pokemon }: { Pokemon: PokemonListItem }) => {
 
   return (
     <View
-      accessible
-      accessibilityRole="button"
-      accessibilityLabel={t("accessibility.pokemonCard", {
-        name: Pokemon.name,
-        id: Pokemon.id,
-      })}
-      accessibilityHint={t("accessibility.pokemonCardHint")}
       className="mt-1 w-[94%] rounded-2xl p-1"
       style={{
         backgroundColor: colors.grayscale.background,

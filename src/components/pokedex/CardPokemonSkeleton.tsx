@@ -29,9 +29,11 @@ export const CardPokemonSkeleton = () => {
 
   return (
     <Animated.View
-      className="mt-1 w-[94%] rounded-2xl p-1"
+      className="rounded-2xl p-1"
       style={[
         {
+          width: "94%",
+          marginTop: 4,
           backgroundColor: colors.grayscale.background,
           shadowColor: "#000",
           shadowOffset: { width: 0.5, height: 0 },

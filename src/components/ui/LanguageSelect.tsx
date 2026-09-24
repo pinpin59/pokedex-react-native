@@ -36,10 +36,15 @@ export default function LanguageSelect() {
         onPressOut={() => {
           scale.value = withSpring(1);
         }}
-        className="h-10 w-10 items-center justify-center rounded-full"
         style={[
           {
             backgroundColor: colors.grayscale.white,
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
           },
           animatedStyle,
         ]}

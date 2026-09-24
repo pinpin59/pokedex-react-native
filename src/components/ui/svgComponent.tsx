@@ -41,7 +41,6 @@ const SVG = ({
       className={className}
       style={style}
       strokeWidth={strokeWidth}
-      accessible={false}
     />
   );
 };

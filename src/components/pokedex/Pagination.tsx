@@ -16,7 +16,7 @@ const Pagination = ({ page, onPrevious, onNext }: PaginationProps) => {
       <Pressable disabled={page === 1} onPress={onPrevious}>
         <Text
           style={{
-            color: page === 1 ? colors.grayscale.medium : colors.primary,
+            color: page === 1 ? colors.grayscale.medium : colors.foreground,
           }}
         >
           {t("pagination.previous")}

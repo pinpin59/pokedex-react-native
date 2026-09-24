@@ -1,56 +1,303 @@
-# Welcome to your Expo app 👋
+# Pokédex
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+🌐 **Languages:** [English](#english) · [Français](#français)
 
-## Get started
+---
 
-1. Install dependencies
+<a id="english"></a>
 
-   ```bash
-   npm install
-   ```
+## 🇬🇧 English
 
-2. Start the app
+A mobile Pokédex app built with React Native and Expo, using the PokéAPI as its data source.
+The app lets you browse Pokémon, search for a Pokémon, view detailed information, switch language or theme, and listen to a Pokémon's cry.
 
-   ```bash
-   npx expo start
-   ```
+### Screenshots
 
-In the output, you'll find options to open the app in a
+<p align="center">
+  <img src="./assets/images/screenshots/home-light.webp" width="220" alt="Home screen in light theme showing a paginated list of Pokémon" />
+  <img src="./assets/images/screenshots/details-light.webp" width="220" alt="Pokémon detail page in light theme with stats and type colors" />
+  <img src="./assets/images/screenshots/search.webp" width="220" alt="Search by name screen with filtered Pokémon results" />
+</p>
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+<p align="center">
+  <img src="./assets/images/screenshots/home-dark.webp" width="220" alt="Home screen in dark theme showing a paginated list of Pokémon" />
+  <img src="./assets/images/screenshots/details-dark.webp" width="220" alt="Pokémon detail page in dark theme with stats and type colors" />
+</p>
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Features
 
-## Get a fresh project
+- Pokémon browsing with pagination
+- Search by name
+- Detail pages
+- Pokémon names and descriptions in French and English
+- Unit conversion
+- Light and dark theme
+- Colors adapted to Pokémon types
+- Animations
+- Playback of Pokémon cries
+- VoiceOver and accessibility support
+- Accessibility labels in French and English
 
-When you're ready, run:
+### Technologies
 
-```bash
-npm run reset-project
+- React Native
+- Expo
+- TypeScript
+- Expo Router
+- TanStack React Query
+- NativeWind / Tailwind CSS
+- React i18next
+- React Native Reanimated
+- Expo Audio
+- PokéAPI
+
+TypeScript is used to ensure reliable typing of the data and the app's components.
+
+### Architecture
+
+The app follows a simple separation between the interface, data fetching, and data transformation:
+
+```text
+Screen
+  ↓
+Hook
+  ↓
+React Query
+  ↓
+Service
+  ↓
+Mapper
+  ↓
+PokéAPI
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Services handle calls to the PokéAPI, and mappers transform the received data into objects suited to the app.
 
-### Other setup steps
+### API
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+The main data comes from:
 
-## Learn more
+- `/pokemon` → list of Pokémon
+- `/pokemon/{id}` → detailed data
+- `/pokemon-species/{id}` → localized names and descriptions
 
-To learn more about developing your project with Expo, look at the following resources:
+### Internationalization
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The app supports:
 
-## Join the community
+- 🇫🇷 French
+- 🇬🇧 English
 
-Join our community of developers creating universal apps.
+Interface texts, Pokémon names and descriptions, and accessibility information are adapted to the selected language.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Accessibility
+
+The app includes VoiceOver support with:
+
+- Dynamic accessibility labels
+- Accessible navigation
+- Accessible information for stats
+- French and English support
+
+### Project structure
+
+```text
+app/
+├── index.tsx
+└── pokemon/
+    └── [id].tsx
+
+components/
+├── layout/
+├── pokemon/
+└── ui/
+
+hooks/
+services/
+mappers/
+theme/
+i18n/
+svg/
+types/
+lib/
+```
+
+### Installation
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Configure the environment by creating a `.env.local` file:
+
+```env
+EXPO_PUBLIC_API_URL=https://pokeapi.co/api/v2
+```
+
+Run the app:
+
+```bash
+npx expo start
+```
+
+The app can be run on a simulator, an emulator, or a physical device.
+
+### Goal
+
+This project was built to practice React Native, TypeScript, data management with React Query, internationalization, animations, audio, and mobile accessibility.
+
+### License
+
+Personal and educational project.
+
+---
+
+<a id="français"></a>
+
+## 🇫🇷 Français
+
+Une application mobile Pokédex développée avec React Native et Expo, utilisant la PokéAPI comme source de données.
+L'application permet de parcourir les Pokémon, de rechercher un Pokémon, de consulter ses informations détaillées, de changer de langue ou de thème et d'écouter son cri.
+
+### Captures d'écran
+
+<p align="center">
+  <img src="./assets/images/screenshots/home-light.webp" width="220" alt="Écran d'accueil en thème clair avec la liste paginée des Pokémon" />
+  <img src="./assets/images/screenshots/details-light.webp" width="220" alt="Page de détails d'un Pokémon en thème clair avec statistiques et couleurs de type" />
+  <img src="./assets/images/screenshots/search.webp" width="220" alt="Écran de recherche par nom avec résultats filtrés" />
+</p>
+
+<p align="center">
+  <img src="./assets/images/screenshots/home-dark.webp" width="220" alt="Écran d'accueil en thème sombre avec la liste paginée des Pokémon" />
+  <img src="./assets/images/screenshots/details-dark.webp" width="220" alt="Page de détails d'un Pokémon en thème sombre avec statistiques et couleurs de type" />
+</p>
+
+### Fonctionnalités
+
+- Parcours des Pokémon avec pagination
+- Recherche par nom
+- Pages de détails
+- Noms et descriptions en français et en anglais
+- Conversion des unités de mesure
+- Thème clair et sombre
+- Couleurs adaptées aux types Pokémon
+- Animations
+- Lecture des cris des Pokémon
+- Support de VoiceOver et de l'accessibilité
+- Labels d'accessibilité en français et en anglais
+
+### Technologies
+
+- React Native
+- Expo
+- TypeScript
+- Expo Router
+- TanStack React Query
+- NativeWind / Tailwind CSS
+- React i18next
+- React Native Reanimated
+- Expo Audio
+- PokéAPI
+
+TypeScript est utilisé pour assurer un typage fiable des données et des différents composants de l'application.
+
+### Architecture
+
+L'application suit une séparation simple entre l'interface, la récupération et la transformation des données :
+
+```text
+Écran
+  ↓
+Hook
+  ↓
+React Query
+  ↓
+Service
+  ↓
+Mapper
+  ↓
+PokéAPI
+```
+
+Les services gèrent les appels à la PokéAPI et les mappers transforment les données reçues en objets adaptés à l'application.
+
+### API
+
+Les principales données utilisées proviennent de :
+
+- `/pokemon` → liste des Pokémon
+- `/pokemon/{id}` → données détaillées
+- `/pokemon-species/{id}` → noms et descriptions localisés
+
+### Internationalisation
+
+L'application prend en charge :
+
+- 🇫🇷 Français
+- 🇬🇧 Anglais
+
+Les textes de l'interface, les noms et descriptions des Pokémon ainsi que les informations d'accessibilité sont adaptés à la langue sélectionnée.
+
+### Accessibilité
+
+L'application intègre le support de VoiceOver avec :
+
+- Labels d'accessibilité dynamiques
+- Navigation accessible
+- Informations accessibles pour les statistiques
+- Support du français et de l'anglais
+
+### Structure du projet
+
+```text
+app/
+├── index.tsx
+└── pokemon/
+    └── [id].tsx
+
+components/
+├── layout/
+├── pokemon/
+└── ui/
+
+hooks/
+services/
+mappers/
+theme/
+i18n/
+svg/
+types/
+lib/
+```
+
+### Installation
+
+Installer les dépendances :
+
+```bash
+npm install
+```
+
+Configurer l'environnement en créant un fichier `.env.local` :
+
+```env
+EXPO_PUBLIC_API_URL=https://pokeapi.co/api/v2
+```
+
+Lancer l'application :
+
+```bash
+npx expo start
+```
+
+L'application peut être lancée sur un simulateur, un émulateur ou un appareil physique.
+
+### Objectif
+
+Ce projet a été réalisé afin de mettre en pratique React Native, TypeScript, la gestion des données avec React Query, l'internationalisation, les animations, l'audio et l'accessibilité mobile.
+
+### Licence
+
+Projet réalisé à des fins personnelles et éducatives.

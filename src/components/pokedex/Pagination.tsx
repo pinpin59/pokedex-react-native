@@ -6,30 +6,62 @@ interface PaginationProps {
   page: number;
   onPrevious: () => void;
   onNext: () => void;
+  className?: string;
 }
 
-const Pagination = ({ page, onPrevious, onNext }: PaginationProps) => {
+export default function Pagination({
+  page,
+  onPrevious,
+  onNext,
+  className = "",
+}: PaginationProps) {
   const { colors } = useTheme();
   const { t } = useTranslation();
+
+  const isFirstPage = page <= 1;
+
   return (
-    <View className="flex-row items-center justify-between px-4 py-3">
-      <Pressable disabled={page === 1} onPress={onPrevious}>
-        <Text
-          style={{
-            color: page === 1 ? colors.grayscale.medium : colors.foreground,
-          }}
-        >
+    <View className={`flex-row items-center justify-between  ${className}`}>
+      <Pressable
+        onPress={onPrevious}
+        disabled={isFirstPage}
+        hitSlop={15}
+        className={`px-5 py-3 rounded-full flex-row items-center justify-center ${
+          isFirstPage ? "opacity-50" : "opacity-100"
+        }`}
+        style={{ backgroundColor: isFirstPage ? "#A0AEC0" : colors.primary }}
+      >
+        <Text className="text-white font-bold text-sm">
           {t("pagination.previous")}
         </Text>
       </Pressable>
 
-      <Text style={{ color: colors.foreground }}>{page}</Text>
+      <View
+        className="w-11 h-11 rounded-full items-center justify-center"
+        style={{
+          borderWidth: 2,
+          borderColor: colors.primary,
+          backgroundColor: colors.background,
+        }}
+      >
+        <Text
+          className="font-bold text-base"
+          style={{ color: colors.foreground }}
+        >
+          {page}
+        </Text>
+      </View>
 
-      <Pressable onPress={onNext}>
-        <Text style={{ color: colors.foreground }}>{t("pagination.next")}</Text>
+      <Pressable
+        onPress={onNext}
+        hitSlop={15}
+        className="px-5 py-3 rounded-full flex-row items-center justify-center"
+        style={{ backgroundColor: colors.primary }}
+      >
+        <Text className="text-white font-bold text-sm">
+          {t("pagination.next")}
+        </Text>
       </Pressable>
     </View>
   );
-};
-
-export default Pagination;
+}

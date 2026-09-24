@@ -14,14 +14,14 @@ The app lets you browse Pokémon, search for a Pokémon, view detailed informati
 ### Screenshots
 
 <p align="center">
-  <img src="./assets/images/screenshots/home-light.webp" width="220" alt="Home screen in light theme showing a paginated list of Pokémon" />
-  <img src="./assets/images/screenshots/details-light.webp" width="220" alt="Pokémon detail page in light theme with stats and type colors" />
-  <img src="./assets/images/screenshots/search.webp" width="220" alt="Search by name screen with filtered Pokémon results" />
+  <img src="./assets/screenshots/home-light.webp" width="220" alt="Home screen in light theme showing a paginated list of Pokémon" />
+  <img src="./assets/screenshots/details-light.webp" width="220" alt="Pokémon detail page in light theme with stats and type colors" />
+  <img src="./assets/screenshots/search.webp" width="220" alt="Search by name screen with filtered Pokémon results" />
 </p>
 
 <p align="center">
-  <img src="./assets/images/screenshots/home-dark.webp" width="220" alt="Home screen in dark theme showing a paginated list of Pokémon" />
-  <img src="./assets/images/screenshots/details-dark.webp" width="220" alt="Pokémon detail page in dark theme with stats and type colors" />
+  <img src="./assets/screenshots/home-dark.webp" width="220" alt="Home screen in dark theme showing a paginated list of Pokémon" />
+  <img src="./assets/screenshots/details-dark.webp" width="220" alt="Pokémon detail page in dark theme with stats and type colors" />
 </p>
 
 ### Features
@@ -164,14 +164,14 @@ L'application permet de parcourir les Pokémon, de rechercher un Pokémon, de co
 ### Captures d'écran
 
 <p align="center">
-  <img src="./assets/images/screenshots/home-light.webp" width="220" alt="Écran d'accueil en thème clair avec la liste paginée des Pokémon" />
-  <img src="./assets/images/screenshots/details-light.webp" width="220" alt="Page de détails d'un Pokémon en thème clair avec statistiques et couleurs de type" />
-  <img src="./assets/images/screenshots/search.webp" width="220" alt="Écran de recherche par nom avec résultats filtrés" />
+  <img src="./assets/screenshots/home-light.webp" width="220" alt="Écran d'accueil en thème clair avec la liste paginée des Pokémon" />
+  <img src="./assets/screenshots/details-light.webp" width="220" alt="Page de détails d'un Pokémon en thème clair avec statistiques et couleurs de type" />
+  <img src="./assets/screenshots/search.webp" width="220" alt="Écran de recherche par nom avec résultats filtrés" />
 </p>
 
 <p align="center">
-  <img src="./assets/images/screenshots/home-dark.webp" width="220" alt="Écran d'accueil en thème sombre avec la liste paginée des Pokémon" />
-  <img src="./assets/images/screenshots/details-dark.webp" width="220" alt="Page de détails d'un Pokémon en thème sombre avec statistiques et couleurs de type" />
+  <img src="./assets/screenshots/home-dark.webp" width="220" alt="Écran d'accueil en thème sombre avec la liste paginée des Pokémon" />
+  <img src="./assets/screenshots/details-dark.webp" width="220" alt="Page de détails d'un Pokémon en thème sombre avec statistiques et couleurs de type" />
 </p>
 
 ### Fonctionnalités
